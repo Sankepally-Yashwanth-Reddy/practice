@@ -1,0 +1,68 @@
+<!-- auth.component.html -->
+<section>
+    <div class="auth-container">
+        <!-- Button Group to Toggle Between Login and Sign Up -->
+        <div class="form-toggle">
+            <button class="toggle-button" [class.active]="isLogin" (click)="toggleForm()">
+                Login
+            </button>
+            <button class="toggle-button" [class.active]="!isLogin" (click)="toggleForm()">
+                Sign Up
+            </button>
+        </div>
+
+        <!-- Login Form with Animation -->
+        <form *ngIf="isLogin" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" [@formTransition]>
+            <h2>Login</h2>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" type="email" placeholder="Enter your email">
+                <div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched" class="error">
+                    Please enter a valid email.
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input id="password" formControlName="password" type="password" placeholder="Enter your password">
+                <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched"
+                    class="error">
+                    Password must be at least 6 characters long.
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        </form>
+
+        <!-- Sign Up Form with Animation -->
+        <form *ngIf="!isLogin" [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()" [@formTransition]>
+            <h2>Sign Up</h2>
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input id="name" formControlName="name" type="text" placeholder="Enter your name">
+                <div *ngIf="signUpForm.controls['name'].invalid && signUpForm.controls['name'].touched" class="error">
+                    Name is required.
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" type="email" placeholder="Enter your email">
+                <div *ngIf="signUpForm.controls['email'].invalid && signUpForm.controls['email'].touched" class="error">
+                    Please enter a valid email.
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input id="password" formControlName="password" type="password" placeholder="Enter your password">
+                <div *ngIf="signUpForm.controls['password'].invalid && signUpForm.controls['password'].touched"
+                    class="error">
+                    Password must be at least 6 characters long.
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="signUpForm.invalid">Sign Up</button>
+        </form>
+    </div>
+</section>
